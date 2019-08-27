@@ -31,7 +31,7 @@ provider:
   environment:
     FOO_TABLE: ${self:custom.fooTableName}
     LOGGING_LEVEL: "silly"
-    SOME_SECRET: "${file(./config/secrets/secrets.json):someSecret}"
+#    SOME_SECRET: "${file(./config/secrets/secrets.json):someSecret}"
 
 functions:
   app:

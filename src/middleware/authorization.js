@@ -1,4 +1,4 @@
-const authorizationMiddleware = (req, res, next) => {
+const authorization = (req, res, next) => {
   // if (
   //
   // Fill in with domain specific auth details
@@ -10,4 +10,4 @@ const authorizationMiddleware = (req, res, next) => {
   // }
 };
 
-module.exports = authorizationMiddleware;
+module.exports = authorization;

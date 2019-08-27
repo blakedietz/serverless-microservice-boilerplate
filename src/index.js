@@ -8,9 +8,10 @@ if (process.env.NODE_ENV === "LOCAL") {
   dynamoose.local("http://localhost:8000");
 }
 // Middleware
-const errorLogger = require("./logging/error.logger");
-const requestLogger = require("./logging/request.logger");
-const authorizationMiddleware =require("./middleware/authorization.middleware");
+const errorLogger = require("./middleware/logging/error.logger");
+const requestLogger = require("./middleware/logging/request.logger");
+const authorizationMiddleware = require("./middleware/authorization");
+const { handleError } = require("./middleware/error");
 
 // Routes
 const fooRoutes = require("./foo/foo.routes");
@@ -39,6 +40,7 @@ app.use(
 
 // Finally log all errors
 app.use(errorLogger);
+app.use(handleError);
 
 /*
  Wrap the application in the serverless http translator. This makes it so that a lambda event is turned into an express
