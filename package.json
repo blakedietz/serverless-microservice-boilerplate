@@ -12,15 +12,15 @@
   "author": "bdietz",
   "license": "MIT",
   "dependencies": {
+    "apollo-server-fastify": "^2.9.1",
+    "aws-lambda-fastify": "^1.0.3",
     "cors": "^2.8.4",
     "dynamodb": "^1.1.1",
     "dynamoose": "^1.10.0",
-    "express": "^4.16.2",
-    "express-winston": "^3.2.0",
+    "fastify": "^2.7.1",
+    "lodash": "^4.17.15",
     "serverless": "^1.50.0",
-    "serverless-http": "^2.0.2",
-    "uuid": "^3.3.2",
-    "winston": "^3.2.1"
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "aws-sdk": "^2.12.0",

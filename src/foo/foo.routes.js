@@ -1,48 +1,26 @@
-const express = require("express");
-const router = express.Router();
-
 const FooController = require("./foo.controller");
-const { wrapAsync } = require("../lib/wrap-async");
-const logger = require("../middleware/logging/application.logger");
 const { getFooRepository } = require("./foo.repository");
 
 const fooController = new FooController({
-  fooRepository: getFooRepository(),
-  logger
+  fooRepository: getFooRepository()
 });
 
-router.get("/",
-  wrapAsync(
-    async (req, res, next) => {
-      return res.json(await fooController.getAll());
-    }
-  )
-);
+async function routes(fastify) {
+  fastify.get("/:id", async ({ params: { version } }, options) => {
+    return await fooController.getById(version);
+  });
 
-router.get(
-  "/:id",
-  wrapAsync(
-    async ({ params: { version } }, res, next) => {
-      return res.json(await fooController.getById(version));
-    }
-  )
-);
+  fastify.get("/", async () => {
+    return await fooController.getAll();
+  });
 
-router.post("/",
-  wrapAsync(
-    async ({ body: {  foo } }, res, next) => {
-      return res.json(await fooController.create(foo));
-    }
-  )
-);
+  fastify.post("/", async ({ body: { foo } }, options) => {
+    return await fooController.create(foo);
+  });
 
-router.put(
-  "/:id",
-  wrapAsync(
-    async ({ params: { id }, body: { foo } }, res, next) => {
-      return res.json(await fooController.update(id, foo));
-    }
-  )
-);
+  fastify.put("/:id", async ({ params: { id } }, options) => {
+    return await fooController.update(id, foo);
+  });
+}
 
-module.exports = router;
+module.exports = routes;

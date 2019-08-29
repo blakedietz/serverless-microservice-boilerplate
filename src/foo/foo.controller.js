@@ -1,7 +1,6 @@
 class FooController {
-  constructor({ fooRepository, logger }) {
+  constructor({ fooRepository }) {
     this.fooRepository = fooRepository;
-    this.logger = logger;
   }
 
   async create(foo) {
@@ -17,10 +16,7 @@ class FooController {
   }
 
   async update(id, changes) {
-    return this.fooRepository.updateFoo(
-      id,
-     changes
-    );
+    return this.fooRepository.updateFoo(id, changes);
   }
 }
 
